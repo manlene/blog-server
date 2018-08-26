@@ -1,4 +1,4 @@
-package com.mm.blog.test;
+package com.mm.blog;
 
 
 import org.springframework.boot.SpringApplication;
