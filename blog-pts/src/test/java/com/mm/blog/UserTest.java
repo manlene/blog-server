@@ -5,13 +5,12 @@ import com.mm.blog.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
-/**
+/**ot
  * @Auther: mm
  * @Date: 2018/8/26 16:45
  * @Description:
@@ -38,8 +37,6 @@ public class UserTest {
     @Test
     public void testFindUser(){
         User user=new User();
-        user.setEmail("qq332222222@qq.com");
-        user.setPassword("123456");
-        user= userService.findUserByEmailAndPassword(user);
+        user= userService.findUserByEmailAndPassword("qq332222222@qq.com","123456");
     }
 }
