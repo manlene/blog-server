@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +54,8 @@ public class UserHandler {
         User user = new User();
         BeanUtils.copyProperties(userRegisterCommand, user);
         user.setCreateTime(new Date());
+        //默认是生效状态
+        user.setStatus(User.STATUS_ACTIVE);
         userService.saveUser(user);
 
         return APIResponse.build(ResponseStatus.REGISTER_SUCCESS, null);
@@ -65,9 +68,36 @@ public class UserHandler {
         for (User user:users) {
             UserLoginCommand userLoginCommand=new UserLoginCommand();
             BeanUtils.copyProperties(user,userLoginCommand);
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ");
+            userLoginCommand.setCreateTimeStr(sf.format(userLoginCommand.getCreateTime()));
             userLoginCommands.add(userLoginCommand);
         }
         return APIResponse.build(ResponseStatus.FIND_USER_SUCCESS, userLoginCommands);
     }
 
+    public  APIResponse<User> findUserById(String id){
+        if (StringUtils.isEmpty(id))
+            return APIResponse.build(ResponseStatus.FAIL_PARAMETER_EXCEPTION, null);
+        User user=userService.findUserById(id);
+       return APIResponse.build(ResponseStatus.FIND_USER_SUCCESS, user);
+    }
+    public APIResponse updateUser(UserRegisterCommand userRegisterCommand) {
+
+        if (!userRegisterCommand.getPassword().equals(userRegisterCommand.getRepassword()))
+            return APIResponse.build(ResponseStatus.PASSWORD_NOT_SAME_ERROR, null);
+        User user = new User();
+        BeanUtils.copyProperties(userRegisterCommand, user);
+
+        userService.updateUser(user);
+
+        return APIResponse.build(ResponseStatus.UPDATE_USER_SUCCESS, null);
+    }
+    public APIResponse updateUserStatus(UserRegisterCommand userRegisterCommand) {
+        User user = new User();
+        BeanUtils.copyProperties(userRegisterCommand, user);
+
+        userService.updateUser(user);
+
+        return APIResponse.build(ResponseStatus.UPDATE_USER_SUCCESS, null);
+    }
 }

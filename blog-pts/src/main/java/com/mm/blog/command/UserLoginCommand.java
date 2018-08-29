@@ -23,6 +23,18 @@ public class UserLoginCommand implements Serializable {
 
     private Date createTime;
 
+    private String  createTimeStr;
+
+    private  Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }
@@ -53,5 +65,13 @@ public class UserLoginCommand implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

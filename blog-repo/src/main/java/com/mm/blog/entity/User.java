@@ -28,6 +28,20 @@ public class User implements Serializable {
 
     private Date createTime;
 
+    private Integer status;
+    /**激活状态：1**/
+    public static final Integer STATUS_ACTIVE=1;
+    /**失效状态：0**/
+    public static final Integer STATUS_INVALID=0;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }

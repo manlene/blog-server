@@ -11,11 +11,15 @@ public class UserRegisterCommand implements Serializable {
 
 
     private static final long serialVersionUID = 6528678087069885488L;
+    private String id;
     private String loginName;
     private String email;
     private String password;
     //重复密码
     private String repassword;
+
+    private Integer status;
+
     public String getLoginName() {
         return loginName;
     }
@@ -46,5 +50,21 @@ public class UserRegisterCommand implements Serializable {
 
     public void setRepassword(String repassword) {
         this.repassword = repassword;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

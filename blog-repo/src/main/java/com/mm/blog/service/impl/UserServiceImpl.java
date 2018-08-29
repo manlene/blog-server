@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * @Auther: mm
@@ -23,21 +27,43 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public User findUserByEmailAndPassword(User user) {
-        Criteria emailCriteria = Criteria.where("email").is(user.getEmail());
-        Criteria pwdCriteria = Criteria.where("password").is(user.getPassword());
-        Criteria cr = new Criteria();
-        Query query = new Query(cr.andOperator(emailCriteria, pwdCriteria));
+    public User findUserByEmailAndPassword(String email, String password) {
+        Criteria emailCriteria = Criteria.where("email").is(email)
+                .and("password").is(password).and("status").is(User.STATUS_ACTIVE);
+        Query query = new Query(emailCriteria);
         User userDb = mongoTemplate.findOne(query, User.class);
-//        Criteria emailCriteria = Criteria.where("email").is(user.getEmail())
-//                .and("password").is(user.getPassword());
-//        Query query = new Query(emailCriteria);
-//        User userDb = mongoTemplate.findOne(query, User.class);
         return userDb;
     }
 
     public void saveUser(User user) {
         userDao.save(user);
-      // mongoTemplate.save(user);
+
+    }
+
+    public List<User> findAllUser() {
+        return mongoTemplate.findAll(User.class);
+    }
+
+    public User findUserById(String id) {
+        return mongoTemplate.findById(id,User.class);
+    }
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    public void updateUser(User user) {
+        Criteria updateCriteria = Criteria.where("_id").is(user.getId());
+        Update update=new Update();
+        if (!StringUtils.isEmpty(user.getLoginName()))
+            update.set("loginName",user.getLoginName());
+        if (!StringUtils.isEmpty(user.getPassword()))
+            update.set("password",user.getPassword());
+        if (!StringUtils.isEmpty(user.getEmail()))
+            update.set("email",user.getEmail());
+        if (!StringUtils.isEmpty(user.getStatus()))
+        update.set("status",user.getStatus().equals(User.STATUS_ACTIVE)?User.STATUS_INVALID:User.STATUS_ACTIVE);
+        Query query = new Query(updateCriteria);
+        mongoTemplate.updateFirst(query, update,User.class);
     }
 }
