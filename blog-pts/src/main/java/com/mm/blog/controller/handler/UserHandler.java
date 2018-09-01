@@ -68,7 +68,7 @@ public class UserHandler {
         for (User user:users) {
             UserLoginCommand userLoginCommand=new UserLoginCommand();
             BeanUtils.copyProperties(user,userLoginCommand);
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ");
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
             userLoginCommand.setCreateTimeStr(sf.format(userLoginCommand.getCreateTime()));
             userLoginCommands.add(userLoginCommand);
         }

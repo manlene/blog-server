@@ -1,12 +1,15 @@
 package com.mm.blog.controller;
 
 
+import com.mm.blog.Main;
+import com.mm.blog.bind.NeedLogin;
 import com.mm.blog.command.UserLoginCommand;
 import com.mm.blog.command.UserRegisterCommand;
 import com.mm.blog.controller.handler.UserHandler;
 import com.mm.blog.entity.User;
 import com.mm.blog.response.APIResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +54,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/user")
+
     public APIResponse<List<UserLoginCommand>> findAllUser() {
 
         return userHandler.findAllUser();
@@ -77,4 +81,5 @@ public class UserController {
 
         return userHandler.updateUserStatus(userRegisterCommand);
     }
+
 }
