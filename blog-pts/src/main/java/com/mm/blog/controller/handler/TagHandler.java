@@ -66,4 +66,5 @@ public class TagHandler {
         tagService.updateTagById(tag);
         return APIResponse.build(ResponseStatus.UPDATE_TAG_SUCCESS, null);
     }
+
 }
