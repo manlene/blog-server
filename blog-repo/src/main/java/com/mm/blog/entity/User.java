@@ -29,7 +29,7 @@ public class User implements Serializable {
     private Date createTime;
 
     private Integer status;
-    /**激活状态：1**/
+    /**生效状态：1**/
     public static final Integer STATUS_ACTIVE=1;
     /**失效状态：0**/
     public static final Integer STATUS_INVALID=0;

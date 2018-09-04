@@ -16,21 +16,30 @@ public class Tag implements Serializable {
 
 
     private static final long serialVersionUID = -5432481462559390135L;
-
+    /**
+     * 生效状态：1
+     **/
+    public static final Integer STATUS_ACTIVE = 1;
+    /**
+     * 失效状态：0
+     **/
+    public static final Integer STATUS_INVALID = 0;
     @Id
-    private Integer id;
+    private String id;
 
     private String tagName;
 
     private Date createTime;
 
-    private Integer userId;
+    private String userId;
 
-    public Integer getId() {
+    private Integer status;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,11 +59,19 @@ public class Tag implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

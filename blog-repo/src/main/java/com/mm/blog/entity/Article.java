@@ -16,7 +16,7 @@ public class Article implements Serializable {
 
     private static final long serialVersionUID = 2350289533171241890L;
     @Id
-    private Integer id;
+    private String id;
 
     private String articleTitle;
 
@@ -24,15 +24,28 @@ public class Article implements Serializable {
 
     private Date createTime;
 
-    private Integer user_id;
+    private String userId;
 
-    private Integer tag_id;
+    private Integer status;
 
-    public Integer getId() {
+    /**
+     * 未发布状态：2
+     **/
+    public static final Integer STATUS_NOT_PUBLISH = 2;
+    /**
+     * 失效状态：0
+     **/
+    public static final Integer STATUS_INVALID = 0;
+    /**
+     * 已发布状态：1
+     **/
+    public static final Integer STATUS_PUBLISH = 1;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,19 +73,19 @@ public class Article implements Serializable {
         this.createTime = createTime;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Integer getTag_id() {
-        return tag_id;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setTag_id(Integer tag_id) {
-        this.tag_id = tag_id;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

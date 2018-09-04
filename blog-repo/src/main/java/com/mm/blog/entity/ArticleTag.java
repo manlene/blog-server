@@ -16,33 +16,33 @@ public class ArticleTag implements Serializable {
 
     private static final long serialVersionUID = -356742711335402696L;
     @Id
-    private Integer id;
+    private String id;
 
-    private Integer tagId;
+    private String tagId;
 
-    private Integer articleId;
+    private String articleId;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getTagId() {
+    public String getTagId() {
         return tagId;
     }
 
-    public void setTagId(Integer tagId) {
+    public void setTagId(String tagId) {
         this.tagId = tagId;
     }
 
-    public Integer getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 }
