@@ -2,6 +2,7 @@ package com.mm.blog;
 
 import com.mm.blog.entity.User;
 import com.mm.blog.service.UserService;
+import com.mm.blog.util.Md5;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,11 @@ public class UserTest {
     public void testSaveUser(){
         User user=new User();
 
-        user.setEmail("qq222222222@qq.com");
-        user.setPassword("123456");
+        user.setEmail("dzq@qq.com");
+        user.setPassword(Md5.encrypt("123456"));
         user.setLoginName("xiaofeixia");
         user.setCreateTime(new Date());
+        user.setStatus(1);
         userService.saveUser(user);
     }
 

@@ -89,22 +89,22 @@ public class User implements UserDetails {
     }
 
     public String getUsername() {
-        return null;
+        return loginName;
     }
 
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
