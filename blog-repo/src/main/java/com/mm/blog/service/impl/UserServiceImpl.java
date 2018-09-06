@@ -66,4 +66,11 @@ public class UserServiceImpl implements UserService {
         Query query = new Query(updateCriteria);
         mongoTemplate.updateFirst(query, update,User.class);
     }
+
+    public User findUserByUsername(String username) {
+        Criteria emailCriteria = Criteria.where("email").is(username).and("status").is(User.STATUS_ACTIVE);
+        Query query = new Query(emailCriteria);
+        User userDb = mongoTemplate.findOne(query, User.class);
+        return userDb;
+    }
 }

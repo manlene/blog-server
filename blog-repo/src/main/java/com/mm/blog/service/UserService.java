@@ -42,4 +42,6 @@ public interface UserService {
      * @param user
      */
     void updateUser(User user);
+
+    User findUserByUsername(String username);
 }

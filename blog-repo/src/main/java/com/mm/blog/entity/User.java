@@ -2,8 +2,10 @@ package com.mm.blog.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 
@@ -13,7 +15,7 @@ import java.util.Date;
  * @Description: 用户实体类
  */
 @Document(collection = "user")//指定表名
-public class User implements Serializable {
+public class User implements UserDetails {
 
 
     private static final long serialVersionUID = 6217285991651220043L;
@@ -80,5 +82,29 @@ public class User implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getUsername() {
+        return null;
+    }
+
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    public boolean isEnabled() {
+        return false;
     }
 }

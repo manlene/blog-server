@@ -73,6 +73,11 @@ public enum ResponseStatus {
      * 文章修改成功
      */
     UPDATE_ARTICLE_SUCCESS("1000209", "文章修改成功"),
+
+    /**
+     * 尚未登录，请登录!
+     */
+    NOT_LOGIN_EEROR("1000209", "尚未登录，请登录!"),
     ;
 
     /**
