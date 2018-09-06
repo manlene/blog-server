@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class NeedLoginIntercepter  implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String a=request.getParameter("username");
+        String b=request.getParameter("password");
         if (handler instanceof HandlerMethod){
 
             HandlerMethod method = (HandlerMethod) handler;
