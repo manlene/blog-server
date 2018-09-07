@@ -1,11 +1,10 @@
 package com.mm.blog.controller;
 
 import com.mm.blog.bind.LoginUser;
-import com.mm.blog.bind.NeedLogin;
 import com.mm.blog.command.TagCommand;
-import com.mm.blog.command.UserLoginCommand;
 import com.mm.blog.controller.handler.TagHandler;
 import com.mm.blog.entity.Tag;
+import com.mm.blog.entity.User;
 import com.mm.blog.response.APIResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +24,14 @@ public class TagController {
 
 
     @PostMapping("/tag/save")
-    public APIResponse saveTag(@RequestBody Tag tag, @LoginUser UserLoginCommand userLoginCommand) {
-        tag.setUserId(userLoginCommand.getId());
+    public APIResponse saveTag(@RequestBody Tag tag, @LoginUser User user) {
+        tag.setUserId(user.getId());
         return tagHandler.saveTag(tag);
     }
 
     @GetMapping("/tag")
-    public APIResponse<List<TagCommand>> findAllTagsByUserId(@LoginUser UserLoginCommand userLoginCommand) {
-        return tagHandler.findAllTagsByUserId(userLoginCommand.getId(),null);
+    public APIResponse<List<TagCommand>> findAllTagsByUserId(@LoginUser User user) {
+        return tagHandler.findAllTagsByUserId(user.getId(),null);
     }
 
     @PatchMapping("/tag/update")
@@ -41,7 +40,7 @@ public class TagController {
     }
 
     @GetMapping("/tag/active")
-    public APIResponse<List<TagCommand>> findActiveTagsByUserId(@LoginUser UserLoginCommand userLoginCommand) {
-        return tagHandler.findAllTagsByUserId(userLoginCommand.getId(),Tag.STATUS_ACTIVE);
+    public APIResponse<List<TagCommand>> findActiveTagsByUserId(@LoginUser User user) {
+        return tagHandler.findAllTagsByUserId(user.getId(),Tag.STATUS_ACTIVE);
     }
 }

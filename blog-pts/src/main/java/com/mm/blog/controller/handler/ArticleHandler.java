@@ -42,12 +42,11 @@ public class ArticleHandler {
      * @param userLoginCommand
      * @return
      */
-    public APIResponse saveArticle(ArticleCommand articleCommand, UserLoginCommand userLoginCommand) {
+    public APIResponse saveArticle(ArticleCommand articleCommand) {
         if (StringUtils.isEmpty(articleCommand.getArticleTitle()) || StringUtils.isEmpty(articleCommand.getArticleContent()))
             return APIResponse.build(ResponseStatus.FAIL_PARAMETER_EXCEPTION, null);
         Article article = new Article();
         BeanUtils.copyProperties(articleCommand, article);
-        article.setUserId(userLoginCommand.getId());
         article.setCreateTime(new Date());
         article.setStatus(Article.STATUS_NOT_PUBLISH);
         Article articleDb = articleService.saveArticle(article);

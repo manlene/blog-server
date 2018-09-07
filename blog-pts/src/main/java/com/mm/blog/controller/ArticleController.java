@@ -2,9 +2,9 @@ package com.mm.blog.controller;
 
 import com.mm.blog.bind.LoginUser;
 import com.mm.blog.command.ArticleCommand;
-import com.mm.blog.command.UserLoginCommand;
 import com.mm.blog.controller.handler.ArticleHandler;
 import com.mm.blog.entity.Article;
+import com.mm.blog.entity.User;
 import com.mm.blog.response.APIResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,32 +24,33 @@ public class ArticleController {
     /**
      * 保存文章
      * @param article
-     * @param userLoginCommand
+     * @param user
      * @return
      */
     @PostMapping("/article/save")
-    public APIResponse saveArticle(@RequestBody ArticleCommand article, @LoginUser UserLoginCommand userLoginCommand){
-        return articleHandler.saveArticle(article,userLoginCommand);
+    public APIResponse saveArticle(@RequestBody ArticleCommand article, @LoginUser User user){
+        article.setUserId(user.getId());
+        return articleHandler.saveArticle(article);
 
     }
 
     @GetMapping("/article/{articleId}")
-    public APIResponse<ArticleCommand> findOneArticleByCondition(@PathVariable String  articleId, @LoginUser UserLoginCommand userLoginCommand){
+    public APIResponse<ArticleCommand> findOneArticleByCondition(@PathVariable String  articleId, @LoginUser User user){
         Article article=new Article();
         article.setId(articleId);
-        article.setUserId(userLoginCommand.getId());
+        article.setUserId(user.getId());
         return articleHandler.findArticleByCondition(article);
 
     }
     @GetMapping("/article")
-    public APIResponse<List<ArticleCommand>> getArticleByCondition(@LoginUser UserLoginCommand userLoginCommand) {
+    public APIResponse<List<ArticleCommand>> getArticleByCondition(@LoginUser User user) {
         Article article=new Article();
-        article.setUserId(userLoginCommand.getId());
+        article.setUserId(user.getId());
         return articleHandler.findALLArticleByCondition(article);
     }
     @PatchMapping("/article/update")
-    public APIResponse<List<ArticleCommand>> updateArticle(@RequestBody ArticleCommand articleCommand,@LoginUser UserLoginCommand userLoginCommand) {
-        articleCommand.setUserId(userLoginCommand.getId());
+    public APIResponse<List<ArticleCommand>> updateArticle(@RequestBody ArticleCommand articleCommand,@LoginUser User user) {
+        articleCommand.setUserId(user.getId());
         return articleHandler.updateArticle(articleCommand);
     }
 

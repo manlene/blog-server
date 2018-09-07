@@ -3,20 +3,13 @@ package com.mm.blog.config;
 import com.mm.blog.security.CustomAuthenticationEntryPoint;
 import com.mm.blog.security.CustomAuthenticationFailureHandler;
 import com.mm.blog.security.CustomAuthenticationSuccessHandler;
+import com.mm.blog.util.Md5;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @Auther: manman
@@ -51,11 +44,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 ;
 
 }
-
-
     @Bean
-    public static MessageDigestPasswordEncoder passwordEncoder() {
-        return  new MessageDigestPasswordEncoder("MD5");
+    public static PasswordEncoder passwordEncoder() {
+        return  new PasswordEncoder() {
+            public String encode(CharSequence rawPassword) {
+                return Md5.encrypt(rawPassword.toString());
+            }
+
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encodedPassword.equals(Md5.encrypt(rawPassword.toString()));
+            }
+        };
     }
 
 }
