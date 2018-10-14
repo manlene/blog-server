@@ -26,6 +26,11 @@ public class Album implements Serializable {
 
     private Integer userId;
 
+    /**
+     * 相册封面
+     */
+    private String coverPhoto;
+
     public Integer getId() {
         return id;
     }
@@ -64,5 +69,13 @@ public class Album implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getCoverPhoto() {
+        return coverPhoto;
+    }
+
+    public void setCoverPhoto(String coverPhoto) {
+        this.coverPhoto = coverPhoto;
     }
 }

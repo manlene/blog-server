@@ -26,14 +26,7 @@ public class UserTest {
 
     @Test
     public void testSaveUser(){
-        User user=new User();
-
-        user.setEmail("dzq@qq.com");
-        user.setPassword(Md5.encrypt("123456"));
-        user.setLoginName("xiaofeixia");
-        user.setCreateTime(new Date());
-        user.setStatus(1);
-        userService.saveUser(user);
+       System.out.print(Md5.encrypt("123456"));
     }
 
     @Test

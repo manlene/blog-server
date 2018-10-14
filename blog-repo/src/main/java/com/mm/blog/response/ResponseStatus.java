@@ -77,7 +77,21 @@ public enum ResponseStatus {
     /**
      * 尚未登录，请登录!
      */
-    NOT_LOGIN_EEROR("1000209", "尚未登录，请登录!"),
+    NOT_LOGIN_ERROR("1000210    ", "尚未登录，请登录!"),
+
+    /**
+     * 文件不能为空
+     */
+    FILE_NULL_ERROR("1000211", "文件不能为空"),
+
+    /**
+     * 文件上传失败
+     */
+    FILE_UPLOAD_ERROR("1000212", "文件上传失败"),
+    /**
+     * 文件上传成功
+     */
+    FILE_UPLOAD_SUCCESS("1000213", "文件上传成功"),
     ;
 
     /**

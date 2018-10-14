@@ -6,3 +6,8 @@ spring:
       database: blog
 server:
   port: 8081 #端口号
+uploadDir:
+  D:/nginx-image/image/
+static:
+  image:
+      path: http://localhost/image/
