@@ -36,7 +36,7 @@ public class TagController {
 
     @PatchMapping("/tag/update")
     public APIResponse<List<TagCommand>> updateTag(@RequestBody  Tag tag) {
-        return tagHandler.updateTagStatusById(tag);
+        return tagHandler.updateTagStatusById(tag );
     }
 
     @GetMapping("/tag/active")
